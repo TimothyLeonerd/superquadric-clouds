@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sqclouds"
+version = "0.1.0"
+description = "Lightweight PyTorch tools for generating point clouds from superquadric primitives."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+torch = [
+    "torch",
+]
+vis = [
+    "matplotlib",
+]
+dev = [
+    "torch",
+    "matplotlib",
+    "numpy",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
