@@ -1,6 +1,7 @@
 import math
-
 import torch
+
+from .transforms import transform_points
 
 
 def mirror_octant_points(points: torch.Tensor) -> torch.Tensor:
@@ -111,6 +112,8 @@ def sample_superellipsoid(
     *,
     device: str | torch.device | None = None,
     dtype: torch.dtype = torch.float32,
+    rotation: torch.Tensor | None = None,
+    translation: torch.Tensor | None = None,
 ) -> torch.Tensor:
     """
     Sample a superellipsoid point cloud using positive-octant midpoint sampling
@@ -142,4 +145,13 @@ def sample_superellipsoid(
         device=device,
         dtype=dtype,
     )
-    return mirror_octant_points(positive_octant)
+
+    points = mirror_octant_points(positive_octant)
+
+    points = transform_points(
+        points,
+        rotation=rotation,
+        translation=translation,
+    )
+
+    return points
